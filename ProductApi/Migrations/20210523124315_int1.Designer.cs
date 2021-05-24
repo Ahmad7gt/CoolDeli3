@@ -10,7 +10,7 @@ using ProductApi.Data;
 namespace ProductApi.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210521205735_int1")]
+    [Migration("20210523124315_int1")]
     partial class int1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,10 @@ namespace ProductApi.Migrations
 
             modelBuilder.Entity("ProductApi.Areas.Context.Data.Country", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("ImportTax")
                         .HasColumnType("bit");
@@ -40,9 +41,10 @@ namespace ProductApi.Migrations
 
             modelBuilder.Entity("ProductApi.Areas.Context.Data.Product", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
@@ -62,11 +64,11 @@ namespace ProductApi.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProductTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("ProductTypeId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("countryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("countryId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -79,9 +81,10 @@ namespace ProductApi.Migrations
 
             modelBuilder.Entity("ProductApi.Areas.Context.Data.ProductType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -93,9 +96,10 @@ namespace ProductApi.Migrations
 
             modelBuilder.Entity("ProductApi.Areas.Context.Data.Supplier", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -113,11 +117,11 @@ namespace ProductApi.Migrations
 
             modelBuilder.Entity("ProductSupplier", b =>
                 {
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("SuppliersId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("SuppliersId")
+                        .HasColumnType("int");
 
                     b.HasKey("ProductId", "SuppliersId");
 

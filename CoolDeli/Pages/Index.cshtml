@@ -1,7 +1,44 @@
 ﻿@page
 @model IndexModel
 @{
-   
-}
 
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <h5 class="card-header">
+                Card title
+            </h5>
+            <div class="card-body">
+                <p class="card-text">
+                    Card content
+                </p>
+            </div>
+            <div class="card-footer">
+                Card footer
+            </div>
+        </div>
+
+        <div style="margin :1em">
+            <button type="button" class="btn btn-success">
+                <i class="fas fa-cart-plus"></i>
+
+
+            </button>
+            <button type="button" class="btn btn-success">
+                <i class="fas fa-info-circle"></i>
+
+
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script defer type="text/javascript">
+    $(Document).ready(function () {
+        let allproducts = getUrl("https://localhost:44356/GetAllProducts");
+        console.log(allproducts);
+    })
+</script>
 

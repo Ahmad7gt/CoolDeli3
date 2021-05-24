@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProductApi.Migrations
 {
@@ -11,7 +10,8 @@ namespace ProductApi.Migrations
                 name: "countries",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImportTax = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -24,7 +24,8 @@ namespace ProductApi.Migrations
                 name: "productTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -36,7 +37,8 @@ namespace ProductApi.Migrations
                 name: "suppliers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -50,15 +52,16 @@ namespace ProductApi.Migrations
                 name: "products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Details = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Instock = table.Column<bool>(type: "bit", nullable: false),
                     Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    countryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProductTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    countryId = table.Column<int>(type: "int", nullable: true),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,8 +84,8 @@ namespace ProductApi.Migrations
                 name: "ProductSupplier",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SuppliersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    SuppliersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
