@@ -2,7 +2,7 @@
 
 namespace ProductApi.Migrations
 {
-    public partial class int1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

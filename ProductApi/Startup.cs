@@ -33,6 +33,10 @@ namespace ProductApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProductApi", Version = "v1" });
             });
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +53,7 @@ namespace ProductApi
 
             app.UseRouting();
 
+            app.UseCors("AllowAll");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

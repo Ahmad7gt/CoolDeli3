@@ -3,42 +3,54 @@
 @{
 
 }
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <h5 class="card-header">
-                Card title
-            </h5>
-            <div class="card-body">
-                <p class="card-text">
-                    Card content
-                </p>
-            </div>
-            <div class="card-footer">
-                Card footer
-            </div>
-        </div>
+<div class="row" id="cards-row">
 
-        <div style="margin :1em">
-            <button type="button" class="btn btn-success">
-                <i class="fas fa-cart-plus"></i>
-
-
-            </button>
-            <button type="button" class="btn btn-success">
-                <i class="fas fa-info-circle"></i>
-
-
-            </button>
-        </div>
-
-    </div>
 </div>
 
 <script defer type="text/javascript">
     $(Document).ready(function () {
-        let allproducts = getUrl("https://localhost:44356/GetAllProducts");
-        console.log(allproducts);
+        let productDivText = '';
+        $.ajax({
+            method: "GET",
+            beforeSend: function (request){
+                request.setRequestHeader("Access-Control-Allow-Origin","*");
+                },
+            url: "https://localhost:5101/GetAllProducts",
+            crossDomain: true
+            }).done(function (data){
+                if(!data) return;
+                for(let i = 0; i < data.length; i++) {
+                    productDivText += `        <div class="card">
+                                                   <h5 class="card-header">
+                                                       ${data[i].name}
+                                                   </h5>
+                                                   <div class="card-body">
+                                                       <p class="card-text">
+                                                           ${data[i].details}
+                                                       </p>
+                                                   </div>
+                                                   <div class="card-footer">
+                                                       ${data[i].price}
+                                                   </div>
+                                               </div>
+                                       
+                                               <div style="margin :1em">
+                                                   <button type="button" class="btn btn-success">
+                                                       <i class="fas fa-cart-plus"></i>
+                                       
+                                       
+                                                   </button>
+                                                   <button type="button" class="btn btn-success">
+                                                       <i class="fas fa-info-circle"></i>
+                                       
+                                       
+                                                   </button>
+                                               </div>`
+                }
+                let productsDiv = document.getElementById("cards-row");
+                productsDiv.innerHTML = '';
+                productsDiv.innerHTML = productDivText;
+
+            });
     })
 </script>
-

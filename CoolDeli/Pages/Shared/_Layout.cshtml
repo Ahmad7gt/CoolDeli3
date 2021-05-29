@@ -8,6 +8,10 @@
     <script src="https://kit.fontawesome.com/1c6697c76d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/site.css" />
     @await RenderSectionAsync("Scripts", required: false)
+        @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
 
 </head>
 <body>
@@ -68,9 +72,7 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
 
 </body>
 </html>

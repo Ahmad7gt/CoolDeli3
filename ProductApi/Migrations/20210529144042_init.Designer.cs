@@ -10,8 +10,8 @@ using ProductApi.Data;
 namespace ProductApi.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20210523124315_int1")]
-    partial class int1
+    [Migration("20210529144042_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
