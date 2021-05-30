@@ -11,11 +11,11 @@ namespace ProductApi.Data
     public class ProductContext : DbContext
     {
         public DbSet<Product> products { get; set; }
-        public DbSet<Country> countries { get; set; }
+   
 
         public DbSet<ProductType> productTypes { get; set; }
 
-        public DbSet<Supplier> suppliers { get; set; }
+      
 
         
 

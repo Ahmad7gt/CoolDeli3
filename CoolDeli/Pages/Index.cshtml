@@ -20,6 +20,7 @@
             }).done(function (data){
                 if(!data) return;
                 for(let i = 0; i < data.length; i++) {
+                    cart.allItems.push(data[i]);
                     productDivText += `        <div class="card">
                                                    <h5 class="card-header">
                                                        ${data[i].name}
@@ -35,15 +36,11 @@
                                                </div>
                                        
                                                <div style="margin :1em">
-                                                   <button type="button" class="btn btn-success">
-                                                       <i class="fas fa-cart-plus"></i>
-                                       
-                                       
+                                                   <button type="button" class="btn btn-success" onclick="addToCart(${data[i].id})">
+                                                       <i class="fas fa-cart-plus"></i>                                       
                                                    </button>
                                                    <button type="button" class="btn btn-success">
-                                                       <i class="fas fa-info-circle"></i>
-                                       
-                                       
+                                                       <i class="fas fa-info-circle"></i>                                       
                                                    </button>
                                                </div>`
                 }

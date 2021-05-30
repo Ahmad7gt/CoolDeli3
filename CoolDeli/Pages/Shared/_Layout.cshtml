@@ -1,78 +1,157 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - CoolDeli</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <script src="https://kit.fontawesome.com/1c6697c76d.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="~/css/site.css" />
-    @await RenderSectionAsync("Scripts", required: false)
-        @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <link rel="stylesheet" href="~/css/site.css"/>
+    @await RenderSectionAsync("Scripts", false)
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.5.0.js"></script>
 </head>
 <body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="navbar-toggler-icon"></span>
-                    </button> <a class="navbar-brand" href="#">CoolDeli</a>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Contct <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="navbar-toggler-icon"></span>
+                </button> <a class="navbar-brand" href="#">CoolDeli</a>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Contct <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
 
-                        </ul>
+                    </ul>
+                    <ul class="navbar-nav ml-md-auto">
 
-                        <ul class="navbar-nav ml-md-auto">
+                        <li class="nav-item active">
 
-                            <li class="nav-item active">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-orange dropdown-toggle cartMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-shopping-cart"></i> <span class="badge badge-warning" data-bind="text: cartCurrent().length"></span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="cartDropDown">
+                                        <!-- ko if:cartCurrent().length > 0 -->
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Price</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: cart.cartCurrent">
+                                            <tr>
+                                                <th scope="row"><a href="#" data-bind="click: $parent.removeFromCart.bind($data,$index())"> tabort</a></th>
+                                                <td data-bind="text: name"></td>
+                                                <td>1</td>
+                                                <td data-bind="text: price"></td>
+                                            </tr>
 
-                                <i style="color:yellowgreen" class="fas fa-cart-plus  "></i>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr> 
+                                                <th>Total: </th>
+                                                <td> </td>
+                                                <td> </td>
+                                                <td data-bind="text: getTotal()"></td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                        <hr/>
+                                        <a href="/cart" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Go to cart!</a>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: cartCurrent().length > 0 -->
+                                        <p class="text-monospace">You have no products in your cart!</p>
+                                        <!-- /ko -->
 
-
-                            </li>
-                            <
-                        </ul>
-                    </div>
-                </nav>
-                <div class="jumbotron">
-                    <h2>
-                        Welcome To your CoolDeli WebShop
-                    </h2>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
-                    </p>
-
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
+            </nav>
+            <div class="jumbotron">
+                <h2>
+                    Welcome To your CoolDeli WebShop
+                </h2>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
+                </p>
+
             </div>
         </div>
-
     </div>
+
+</div>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        &copy; 2021 - CoolDeli - <a asp-area="" asp-page="/Privacy">Privacy</a>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - CoolDeli - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
+</footer>
 
 
 </body>
 </html>
+<script>
+function cartVM()
+{
+    let self = this;
+        this.cartCurrent = ko.observableArray();
+        this.allItems = ko.observableArray();
+        
+        this. removeFromCart = function (index) {
+            self.cartCurrent.splice(index, 1);
+        };
+    }
+    let cart = new cartVM();
+const addToCart = (itemId) => {
+    let item = cart.allItems().find(i=> i.id == itemId);
+    let itemToBuy = {
+                country: item.country,
+                details: item.details,
+                enabled: item.enabled,
+                id: item.id,
+                image: item.image,
+                instock: item.instock,
+                name: item.name,
+                price: item.price,
+                productType: item.productType,
+                suppliers: item.suppliers
+    };
+    cart.cartCurrent.push(itemToBuy);
+}
+
+const getTotal = () => 
+{
+    let total =
+     cart.cartCurrent().reduce((a,b) => 
+    {
+        return parseInt(a) + parseInt(b.price);
+    },0);
+    return total;
+}
+    // window.cartVM = cart;
+    ko.applyBindings(cart);
+</script>

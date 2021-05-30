@@ -26,11 +26,9 @@ namespace ProductApi.Areas.Context.Data
 
         public bool Enabled { get; set; }
 
-        public Country country { get; set; }
 
         public virtual ProductType ProductType { get; set; }
 
-        public virtual List<Supplier> Suppliers { get; set; }
 
 
 
