@@ -32,9 +32,9 @@ namespace ProductApi.Controllers
 
         [Route("/GetProductDetails")]
         [HttpGet]
-        public IActionResult GetProductDetails (int id)
+        public IActionResult GetProductDetails(int id)
         {
-          var productDetails=  _context.products.Where(x => x.Id == id).FirstOrDefault().Details;
+            var productDetails = _context.products.Where(x => x.Id == id).FirstOrDefault().Details;
             return Ok(productDetails);
         }
 

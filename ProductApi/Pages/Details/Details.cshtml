@@ -1,0 +1,28 @@
+﻿@page "{productId}"
+@model CoolDeli.Pages.Details.DetailsModel
+@{
+
+
+    if (Model._product is not null)
+    {
+        <h1>@Model._product.Name</h1>
+        <h6>@Model._product.Price</h6>
+
+        <div>
+            <p>
+                <img src="@Model._product.Image" alt="" class="img-fluid float-left" style="max-height: 400px;" />
+                @Model._product.Details
+            </p>
+
+
+        </div>
+
+    }
+    else
+    {
+
+        <span>No Product Found!</span>
+
+    }
+
+}

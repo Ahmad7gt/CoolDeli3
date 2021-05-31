@@ -12,42 +12,50 @@
         let productDivText = '';
         $.ajax({
             method: "GET",
-            beforeSend: function (request){
-                request.setRequestHeader("Access-Control-Allow-Origin","*");
-                },
+            beforeSend: function (request) {
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
             url: "https://localhost:5101/GetAllProducts",
+
+             //method: "GET",
+             //   beforeSend: function (request) {
+             //       request.setRequestHeader("Access-Control-Allow-Origin", "*");
+             //   },
+             //   url: "https://localhost:5101/GetProductDetails",
+
             crossDomain: true
-            }).done(function (data){
-                if(!data) return;
-                for(let i = 0; i < data.length; i++) {
-                    cart.allItems.push(data[i]);
-                    productDivText += `        <div class="card">
+        }).done(function (data) {
+            if (!data) return;
+            for (let i = 0; i < data.length; i++) {
+                cart.allItems.push(data[i]);
+                productDivText += `        <div class="card">
                                                    <h5 class="card-header">
                                                        ${data[i].name}
                                                    </h5>
                                                    <div class="card-body">
-                                                       <p class="card-text">
-                                                           ${data[i].details}
-                                                       </p>
-                                                   </div>
+                                                   <div>
+                                                   <img src ="${data[i].image}"style="width:150px;height:150px;>
+                                                    <div/>
                                                    <div class="card-footer">
-                                                       ${data[i].price}
+                                                       ${data[i].price}kr
                                                    </div>
-                                               </div>
-                                       
-                                               <div style="margin :1em">
+
+
+
                                                    <button type="button" class="btn btn-success" onclick="addToCart(${data[i].id})">
-                                                       <i class="fas fa-cart-plus"></i>                                       
+                                                       <i class="fas fa-cart-plus"></i>
                                                    </button>
-                                                   <button type="button" class="btn btn-success">
-                                                       <i class="fas fa-info-circle"></i>                                       
-                                                   </button>
-                                               </div>`
+
+                                                    <a href="GetProductDetails/${data[i].id}" class="btn btn-link btn-orange">
+
+                                                          <i class="fas fa-info-circle"></i>
+                                                    </a>
+                                                   </div>`
                 }
                 let productsDiv = document.getElementById("cards-row");
                 productsDiv.innerHTML = '';
                 productsDiv.innerHTML = productDivText;
 
             });
-    })
+        })
 </script>
